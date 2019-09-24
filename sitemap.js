@@ -39,12 +39,16 @@ function generatePageSitemap() {
         hostname: 'https://codeforgeek.com',        
         urls: [
             { url: '/' , changefreq: 'daily', priority: 0.8 },
-            { url: '/articles' , changefreq: 'daily', priority: 0.8 },
-            { url: '/courses' , changefreq: 'daily', priority: 0.8 },
-            { url: '/start-here', changefreq: 'daily', priority: 0.8 },
-            { url: '/about', changefreq: 'daily', priority: 0.8 },
-            { url: '/terms-service' , changefreq: 'daily', priority: 0.8 },
-            { url: '/advertise-on-codeforgeek-media-kit' , changefreq: 'daily', priority: 0.8 },
+            { url: '/articles/' , changefreq: 'daily', priority: 0.8 },
+            { url: '/courses/' , changefreq: 'daily', priority: 0.8 },
+            { url: '/start-here/', changefreq: 'daily', priority: 0.8 },
+            { url: '/about/', changefreq: 'daily', priority: 0.8 },
+            { url: '/terms-service/' , changefreq: 'daily', priority: 0.8 },
+            { url: '/advertise-on-codeforgeek-media-kit/' , changefreq: 'daily', priority: 0.8 },
+            { url: '/best-programming-tutorial-of-the-blog/', changefreq: 'daily', priority: 0.8 },
+            { url: '/request-programming-tutorial/', changefreq: 'daily', priority: 0.8 },
+            { url: '/contact/', changefreq: 'daily', priority: 0.8 },
+            { url: '/privacy-policy/', changefreq: 'daily', priority: 0.8 }
         ]
     });
 
