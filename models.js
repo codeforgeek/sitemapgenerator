@@ -10,13 +10,13 @@ function getAllArticlesforSitemap(callback) {
 }
 
 function getAllCoursesforSitemap(callback) {
-    global.db.collection('courses').find({}).sort({
+    global.db.collection('courses').find({isPublished: true}).sort({
         date: -1
     }).toArray((err, result) => {
         if (err) {
             return callback(true, 'error retrieving courses.');
         }
-        global.db.collection('lessons').find({}).toArray((err, lessonData) => {
+        global.db.collection('lessons').find({isPublished: true}).toArray((err, lessonData) => {
             if (err) {
                 return callback(true, 'error retrieving courses.');
             }
