@@ -30,7 +30,7 @@ function getAllCoursesforSitemap(callback) {
 }
 
 function getAllAuthorsforSitemap(callback) {
-    global.db.collection('users').find({}).sort({
+    global.db.collection('authors').find({}).sort({
         id: -1
     }).toArray((err, result) => {
         if (err) {
