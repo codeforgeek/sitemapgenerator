@@ -16,7 +16,11 @@ function getAllCoursesforSitemap(callback) {
         if (err) {
             return callback(true, 'error retrieving courses.');
         }
-        global.db.collection('lessons').find({isPublished: true}).toArray((err, lessonData) => {
+        let courseIds = [];
+        result.forEach((singleCourse) => {
+            courseIds.push(singleCourse.id);
+        });
+        global.db.collection('lessons').find({courseId : { $in: courseIds } } ).toArray((err, lessonData) => {
             if (err) {
                 return callback(true, 'error retrieving courses.');
             }
@@ -40,8 +44,20 @@ function getAllAuthorsforSitemap(callback) {
     });
 }
 
+function getAllBitsforSitemap(callback) {
+    global.db.collection('bits').find({}).sort({
+        date: -1
+    }).toArray((err, result) => {
+        if (err) {
+            return callback(true, 'error retrieving bits.');
+        }
+        callback(false, result);
+    });
+}
+
 module.exports = {
     getAllArticlesforSitemap: getAllArticlesforSitemap,
     getAllCoursesforSitemap: getAllCoursesforSitemap,
     getAllAuthorsforSitemap: getAllAuthorsforSitemap,
+    getAllBitsforSitemap: getAllBitsforSitemap,
 }

@@ -30,13 +30,13 @@ function generatePostSitemap() {
             urls: urls
         });
 
-        fs.writeFileSync(path.join(nconf.get('sitemapPath'), 'sitemap-posts.xml'), sitemap.toString());    
+        fs.writeFileSync(path.join(nconf.get('sitemapPath'), 'sitemap-posts.xml'), sitemap.toString());
     });
 }
 
 function generatePageSitemap() {
     var sitemap = sm.createSitemap({
-        hostname: 'https://codeforgeek.com',        
+        hostname: 'https://codeforgeek.com',
         urls: [
             { url: '/' , changefreq: 'daily', priority: 0.8 },
             { url: '/articles/' , changefreq: 'daily', priority: 0.8 },
@@ -84,7 +84,32 @@ function generateCourseSitemap() {
             urls: urls
         });
 
-        fs.writeFileSync(path.join(nconf.get('sitemapPath'), 'sitemap-courses.xml'), sitemap.toString());    
+        fs.writeFileSync(path.join(nconf.get('sitemapPath'), 'sitemap-courses.xml'), sitemap.toString());
+    });
+}
+
+function generateBitsSitemap() {
+    models.getAllBitsforSitemap((err, bits) => {
+        if(err) {
+            console.log('error generating sitemap');
+            // send email or something
+            return;
+        }
+        // generate sitemap
+        let urls = [];
+        bits.forEach((singleBits) => {
+            urls.push({
+                url: singleBits.url,
+                changefreq: 'daily',
+                priority: 0.9
+            });
+        });
+        let sitemap = sm.createSitemap({
+            hostname: 'https://codeforgeek.com',
+            urls: urls
+        });
+
+        fs.writeFileSync(path.join(nconf.get('sitemapPath'), 'sitemap-bits.xml'), sitemap.toString());
     });
 }
 
@@ -109,7 +134,7 @@ function generateAuthorSitemap() {
             urls: urls
         });
 
-        fs.writeFileSync(path.join(nconf.get('sitemapPath'), 'sitemap-authors.xml'), sitemap.toString());    
+        fs.writeFileSync(path.join(nconf.get('sitemapPath'), 'sitemap-authors.xml'), sitemap.toString());
     });
 }
 
@@ -119,6 +144,7 @@ function generateSiteMaps() {
         generatePageSitemap();
         generateCourseSitemap();
         generateAuthorSitemap();
+        generateBitsSitemap();
     }, 1000)
 }
 
